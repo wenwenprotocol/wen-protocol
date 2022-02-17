@@ -2,9 +2,9 @@
 // SPDX-License-Identifier: Apache-2.0
 
 // TODO: replace the address with admin address
-address 0x100000 {
+address 0x300000 {
 module TokenSwapLibrary {
-    use 0x100000::StarswapSafeMath as SafeMath;
+    use 0x300000::StarswapSafeMath as SafeMath;
 
     const ERROR_ROUTER_PARAMETER_INVALID: u64 = 1001;
     const ERROR_SWAP_FEE_ALGORITHM_INVALID: u64 = 1002;

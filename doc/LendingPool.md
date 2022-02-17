@@ -2,7 +2,7 @@
 
 # Barnard
 
-#### `0x88e2677b89841cd4ee7c15535798e1c8::STCLendingPoolV2`
+#### STC 借贷池 `0x88e2677b89841cd4ee7c15535798e1c8::STCLendingPoolV2`
 
 ---
 
@@ -121,7 +121,7 @@ public(script) fun accrue()
 ```
 
 ## Function `latest_exchange_rate`
-获取 WEN-STC 价格信息返回 (价格, 精度)
+获取 WEN-抵押物 价格信息返回 (价格, 精度)
 
 ```js
 public fun latest_exchange_rate(): (u128, u128)

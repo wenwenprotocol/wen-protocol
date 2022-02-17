@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 
 // TODO: replace the address with admin address
-address 0x100000 {
+address 0x300000 {
 
 /// Token Swap
 module TokenSwap {
@@ -13,9 +13,9 @@ module TokenSwap {
     use 0x1::Timestamp;
     use 0x1::Event;
     use 0x1::U256::{Self, U256};
-    use 0x100000::StarswapSafeMath as SafeMath;
-    use 0x100000::TokenSwapConfig;
-    use 0x100000::FixedPoint128;
+    use 0x300000::StarswapSafeMath as SafeMath;
+    use 0x300000::TokenSwapConfig;
+    use 0x300000::FixedPoint128;
 
 
     struct LiquidityToken<X, Y> has key, store, copy, drop {}

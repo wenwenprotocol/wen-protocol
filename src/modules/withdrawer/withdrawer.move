@@ -18,8 +18,8 @@ module WithdrawerV1 {
     use 0x100000::STCLendingPoolV1::STC_POOL;
 
     // TokenSwap address on barnard: 0x4783d08fb16990bd35d83f3e23bf93b8
-    use 0x100000::TokenSwapRouter;
-    use 0x100000::TokenSwapScripts;
+    use 0x300000::TokenSwapRouter;
+    use 0x300000::TokenSwapScripts;
 
     struct DepositEvent has drop, store { addr: address, amount: u128 }
     struct WithdrawEvent has drop, store { addr: address, amount: u128 }

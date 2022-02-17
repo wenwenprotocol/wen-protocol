@@ -1,16 +1,16 @@
 // Copyright (c) The Elements Studio Core Contributors
 // SPDX-License-Identifier: Apache-2.0
 
-address 0x100000 {
+address 0x300000 {
 module TokenSwapRouter {
-    use 0x100000::TokenSwap::{LiquidityToken, Self};
+    use 0x300000::TokenSwap::{LiquidityToken, Self};
     use 0x1::Account;
     use 0x1::Signer;
     use 0x1::Token;
     use 0x1::U256::U256;
-    use 0x100000::TokenSwapLibrary;
-    use 0x100000::TokenSwapFee;
-    use 0x100000::TokenSwapConfig;
+    use 0x300000::TokenSwapLibrary;
+    use 0x300000::TokenSwapFee;
+    use 0x300000::TokenSwapConfig;
 
     const ERROR_ROUTER_PARAMETER_INVALID: u64 = 1001;
     const ERROR_ROUTER_INSUFFICIENT_X_AMOUNT: u64 = 1002;

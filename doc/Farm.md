@@ -2,19 +2,22 @@
 
 # Barnard
 
-#### STC-SHARE `0x88e2677b89841cd4ee7c15535798e1c8::STCSHAREFarmV2`
+#### StarSwap STC-SHARE `0x88e2677b89841cd4ee7c15535798e1c8::STCSHAREFarmV2`
 
-* stake: STC-SHARE LP Token
+* stake: STC-SHARE LP Token on StarSwap
 * reward: Share
 * release per second: 0.1 share/s
 * total reward: 10M share 
 
-#### STC-WEN `0x88e2677b89841cd4ee7c15535798e1c8::STCWENFarmV2`
+#### StarSwap STC-WEN `0x88e2677b89841cd4ee7c15535798e1c8::STCWENFarmV2`
 
-* stake: STC-WEN LP Token
+* stake: STC-WEN LP Token on StarSwap
 * reward: Share
 * release per second: 0.1 share/s
 * total reward: 10M share 
+
+#### KikoSwap STC-WEN
+#### KikoSwap STC-SHARE
 
 ---
 

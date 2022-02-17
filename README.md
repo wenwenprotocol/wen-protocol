@@ -18,6 +18,6 @@ move functional-test
 
 [Token](doc/Token.md)
 
-[LendingPool](doc/STCLendingPool.md)
+[LendingPool](doc/LendingPool.md)
 
-[StarSwap-Farm](doc/StarSwapFarm.md)
+[Farm](doc/Farm.md)

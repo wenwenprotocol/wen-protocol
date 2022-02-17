@@ -1,7 +1,7 @@
 //! account: alice, 0x123, 100 000 000 000
 //! account: bob,   0x124, 100 000 000 000
 //! account: owner, 0x100000,  200 000 000
-//! account: swaper, 0x300000,  20000 000 000 000
+//! account: swaper, 0x400000,  20000 000 000 000
 
 // init mock token
 //! sender: owner
@@ -10,7 +10,7 @@ script {
     use 0x1::STC::STC;
     use 0x100000::SHARE;
     use 0x100000::WEN;
-    use 0x100000::StarSwapFarm;
+    use 0x100000::KikoSwapFarm;
     use 0x100000::TestFarm::STC_WEN;
 
     fun main(sender: signer) {
@@ -22,7 +22,7 @@ script {
         WEN::mint_to(&sender, addr, amount);
         // mint 100 share
         SHARE::mint(&sender, addr, amount * 100);
-        StarSwapFarm::initialize<STC_WEN, SHARE::SHARE, STC, WEN::WEN>(
+        KikoSwapFarm::initialize<STC_WEN, SHARE::SHARE, STC, WEN::WEN>(
             &sender,
             amount * 100,
             1 * 1000000000, // 1 share/s
@@ -62,10 +62,12 @@ script {
 script {
     use 0x1::STC;
     use 0x100000::WEN;
-    use 0x300000::TokenSwapScripts;
+    use 0x400000::SwapScripts;
+    use 0x400000::SwapConfig;
 
     fun main(sender: signer) {
-        TokenSwapScripts::register_swap_pair<STC::STC, WEN::WEN>(sender);
+        SwapConfig::initialize(&sender, 30, 5, 0, 0, 0, 0, 0);
+        SwapScripts::create_pair<STC::STC, WEN::WEN>(sender);
     }
 }
 
@@ -80,10 +82,10 @@ script {
 script {
     use 0x1::STC;
     use 0x100000::WEN;
-    use 0x300000::TokenSwapScripts;
+    use 0x400000::SwapScripts;
 
     fun main(sender: signer) {
-        TokenSwapScripts::add_liquidity<STC::STC, WEN::WEN>(
+        SwapScripts::add_liquidity<STC::STC, WEN::WEN>(
             sender,
             10 * 1000 * 1000 * 1000,    // 10 STC
             10 * 1000 * 1000 * 1000,    // 10 WEN
@@ -99,20 +101,20 @@ script {
 script {
     use 0x1::Signer;
     use 0x1::STC::STC;
-    use 0x100000::StarSwapFarm;
+    use 0x100000::KikoSwapFarm;
     use 0x100000::TestFarm::STC_WEN;
     use 0x100000::WEN::WEN;
     use 0x100000::SHARE::SHARE;
 
     fun main(sender: signer) {
         let addr = Signer::address_of(&sender);
-        StarSwapFarm::deposit<STC_WEN, SHARE, STC, WEN>(&sender, 5 * 1000 * 1000 * 1000);
-        assert(StarSwapFarm::pending<STC_WEN, SHARE, STC, WEN>(addr) == 0, 100);
+        KikoSwapFarm::deposit<STC_WEN, SHARE, STC, WEN>(&sender, 5 * 1000 * 1000 * 1000);
+        assert(KikoSwapFarm::pending<STC_WEN, SHARE, STC, WEN>(addr) == 0, 100);
 
-        let stake = StarSwapFarm::query_stake<STC_WEN, STC, WEN>(addr);
+        let stake = KikoSwapFarm::query_stake<STC_WEN, STC, WEN>(addr);
         assert(stake == 5 * 1000 * 1000 * 1000, 101);
 
-        StarSwapFarm::query_remaining_reward<STC_WEN, SHARE>();
+        KikoSwapFarm::query_remaining_reward<STC_WEN, SHARE>();
     }
 }
 
@@ -127,14 +129,14 @@ script {
 script {
     use 0x1::Signer;
     use 0x1::STC::STC;
-    use 0x100000::StarSwapFarm;
+    use 0x100000::KikoSwapFarm;
     use 0x100000::TestFarm::STC_WEN;
     use 0x100000::WEN::WEN;
     use 0x100000::SHARE::SHARE;
 
     fun main(sender: signer) {
         // 1 share/s  100 s => 100 share
-        let pending = StarSwapFarm::pending<STC_WEN, SHARE, STC, WEN>(Signer::address_of(&sender));
+        let pending = KikoSwapFarm::pending<STC_WEN, SHARE, STC, WEN>(Signer::address_of(&sender));
         assert(pending == 100 * 1000 * 1000 * 1000, 200);
     }
 }
@@ -151,7 +153,7 @@ script {
     use 0x1::Signer;
     use 0x1::Account;
     use 0x1::STC::STC;
-    use 0x100000::StarSwapFarm;
+    use 0x100000::KikoSwapFarm;
     use 0x100000::TestFarm::STC_WEN;
     use 0x100000::WEN::WEN;
     use 0x100000::SHARE::SHARE;
@@ -160,7 +162,7 @@ script {
         let addr = Signer::address_of(&sender);
         let share_before = Account::balance<SHARE>(addr);
         // withdraw
-        StarSwapFarm::withdraw<STC_WEN, SHARE, STC, WEN>(&sender, 1 * 1000 * 1000 * 1000);
+        KikoSwapFarm::withdraw<STC_WEN, SHARE, STC, WEN>(&sender, 1 * 1000 * 1000 * 1000);
 
         let share_after = Account::balance<SHARE>(addr);
         assert(share_before < share_after, 300);
@@ -179,7 +181,7 @@ script {
     use 0x1::Signer;
     use 0x1::Account;
     use 0x1::STC::STC;
-    use 0x100000::StarSwapFarm;
+    use 0x100000::KikoSwapFarm;
     use 0x100000::TestFarm::STC_WEN;
     use 0x100000::WEN::WEN;
     use 0x100000::SHARE::SHARE;
@@ -187,16 +189,16 @@ script {
     fun main(sender: signer) {
         let addr = Signer::address_of(&sender);
         let share_before = Account::balance<SHARE>(addr);
-        let before = StarSwapFarm::query_remaining_reward<STC_WEN, SHARE>();
+        let before = KikoSwapFarm::query_remaining_reward<STC_WEN, SHARE>();
 
         // harvest
-        StarSwapFarm::harvest<STC_WEN, SHARE, STC, WEN>(&sender);
+        KikoSwapFarm::harvest<STC_WEN, SHARE, STC, WEN>(&sender);
 
         let share_after = Account::balance<SHARE>(addr);
-        let after = StarSwapFarm::query_remaining_reward<STC_WEN, SHARE>();
+        let after = KikoSwapFarm::query_remaining_reward<STC_WEN, SHARE>();
         assert(share_before < share_after, 400);
         assert(before > after, 401);
 
-        assert(StarSwapFarm::query_farming_asset<STC_WEN, STC, WEN>() == 4 * 1000 * 1000 * 1000, 402);
+        assert(KikoSwapFarm::query_farming_asset<STC_WEN, STC, WEN>() == 4 * 1000 * 1000 * 1000, 402);
     }
 }

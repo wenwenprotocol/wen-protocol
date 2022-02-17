@@ -2,12 +2,13 @@
 // SPDX-License-Identifier: Apache-2.0
 
 address 0x100000 {
-module StarSwapFarm {
+module KikoSwapFarm {
     use 0x1::Signer;
 
     use 0x100000::YieldFarmingV1 as YieldFarming;
-    // TokenSwap address on barnard: 0x4783d08fb16990bd35d83f3e23bf93b8
-    use 0x300000::TokenSwap::{Self, LiquidityToken};
+    // KikoSwap address on barnard: 0x93777129c9b671d022c27ced0a4017f4
+    use 0x400000::SwapPair::LPToken as LiquidityToken;
+    use 0x400000::SwapLibrary;
 
     // store cap
     struct ModifyCapability<PoolType, AssetT> has key, store {
@@ -22,7 +23,7 @@ module StarSwapFarm {
     ) {
         YieldFarming::initialize<PoolType, RewardTokenT>(account, reward_amount);
         // add asset
-        let order = TokenSwap::compare_token<X, Y>();
+        let order = SwapLibrary::get_token_order<X, Y>();
         if (order == 1) {
             let cap = YieldFarming::add_asset<PoolType, LiquidityToken<X, Y>>(
                 account, release_per_second, delay
@@ -42,7 +43,7 @@ module StarSwapFarm {
         alive: bool,
     ) acquires ModifyCapability {
         let addr = Signer::address_of(account);
-        let order = TokenSwap::compare_token<X, Y>();
+        let order = SwapLibrary::get_token_order<X, Y>();
         if (order == 1) {
             let cap = borrow_global<ModifyCapability<PoolType, LiquidityToken<X, Y>>>(addr);
             YieldFarming::update_asset_with_cap<PoolType, LiquidityToken<X, Y>>(
@@ -60,7 +61,7 @@ module StarSwapFarm {
         account: &signer,
         amount: u128,
     ) {
-        let order = TokenSwap::compare_token<X, Y>();
+        let order = SwapLibrary::get_token_order<X, Y>();
         if (order == 1) {
             YieldFarming::deposit<PoolType, RewardTokenT, LiquidityToken<X, Y>>(account, amount);
         } else {
@@ -72,7 +73,7 @@ module StarSwapFarm {
         account: &signer,
         amount: u128,
     ) {
-        let order = TokenSwap::compare_token<X, Y>();
+        let order = SwapLibrary::get_token_order<X, Y>();
         if (order == 1) {
             YieldFarming::withdraw<PoolType, RewardTokenT, LiquidityToken<X, Y>>(account, amount);
         } else {
@@ -83,7 +84,7 @@ module StarSwapFarm {
     public fun harvest<PoolType: store, RewardTokenT: store, X: copy+drop+store, Y: copy+drop+store>(
         account: &signer,
     ) {
-        let order = TokenSwap::compare_token<X, Y>();
+        let order = SwapLibrary::get_token_order<X, Y>();
         if (order == 1) {
             YieldFarming::harvest<PoolType, RewardTokenT, LiquidityToken<X, Y>>(account);
         } else {
@@ -94,7 +95,7 @@ module StarSwapFarm {
     public fun pending<PoolType: store, RewardTokenT: store, X: copy+drop+store, Y: copy+drop+store>(
         addr: address,
     ): u128 {
-        let order = TokenSwap::compare_token<X, Y>();
+        let order = SwapLibrary::get_token_order<X, Y>();
         if (order == 1) {
             YieldFarming::pending<PoolType, RewardTokenT, LiquidityToken<X, Y>>(addr)
         } else {
@@ -107,7 +108,7 @@ module StarSwapFarm {
     }
 
     public fun query_farming_asset<PoolType: store, X: copy+drop+store, Y: copy+drop+store>(): u128 {
-        let order = TokenSwap::compare_token<X, Y>();
+        let order = SwapLibrary::get_token_order<X, Y>();
         if (order == 1) {
             YieldFarming::query_farming_asset<PoolType, LiquidityToken<X, Y>>()
         } else {
@@ -116,7 +117,7 @@ module StarSwapFarm {
     }
 
     public fun query_stake<PoolType: store, X: copy+drop+store, Y: copy+drop+store>(addr: address): u128 {
-        let order = TokenSwap::compare_token<X, Y>();
+        let order = SwapLibrary::get_token_order<X, Y>();
         if (order == 1) {
             YieldFarming::query_stake<PoolType, LiquidityToken<X, Y>>(addr)
         } else {
@@ -125,7 +126,7 @@ module StarSwapFarm {
     }
 
     public fun query_farming_asset_setting<PoolType: store, X: copy+drop+store, Y: copy+drop+store>(): (u128, u128, u64, bool) {
-        let order = TokenSwap::compare_token<X, Y>();
+        let order = SwapLibrary::get_token_order<X, Y>();
         if (order == 1) {
             YieldFarming::query_farming_asset_setting<PoolType, LiquidityToken<X, Y>>()
         } else {

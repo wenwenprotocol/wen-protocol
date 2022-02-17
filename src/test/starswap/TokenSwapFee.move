@@ -1,14 +1,14 @@
 // Copyright (c) The Elements Studio Core Contributors
 // SPDX-License-Identifier: Apache-2.0
 
-address 0x100000 {
+address 0x300000 {
 module TokenSwapFee {
     use 0x1::Account;
     use 0x1::Token;
     use 0x1::Event;
-    use 0x100000::TokenSwapLibrary;
-    use 0x100000::TokenSwapConfig;
-    use 0x100000::TokenSwap::{Self};
+    use 0x300000::TokenSwapLibrary;
+    use 0x300000::TokenSwapConfig;
+    use 0x300000::TokenSwap::{Self};
     use 0x100000::MockToken::USD as XUSDT;
 
     const ERROR_ROUTER_SWAP_FEE_MUST_NOT_NEGATIVE: u64 = 1031;

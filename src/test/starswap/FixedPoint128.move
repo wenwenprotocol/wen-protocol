@@ -1,4 +1,4 @@
-address 0x100000 {
+address 0x300000 {
 module FixedPoint128 {
     use 0x1::Errors;
     use 0x1::U256::{Self, U256};

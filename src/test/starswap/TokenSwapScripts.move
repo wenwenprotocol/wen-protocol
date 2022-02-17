@@ -1,10 +1,10 @@
 // Copyright (c) The Elements Studio Core Contributors
 // SPDX-License-Identifier: Apache-2.0
 
-address 0x100000 {
+address 0x300000 {
 module TokenSwapScripts {
-    use 0x100000::TokenSwapLibrary;
-    use 0x100000::TokenSwapRouter;
+    use 0x300000::TokenSwapLibrary;
+    use 0x300000::TokenSwapRouter;
 
     /// register swap for admin user
     public(script) fun register_swap_pair<X: copy + drop + store,

@@ -3,6 +3,7 @@
 //! account: alice,  0x125, 100 000 000 000
 //! account: oracle, 0x07fa08a855753f0ff7292fdcbe871216, 100 000 000 000
 //! account: owner, 0x100000,  20000 000 000 000
+//! account: swaper, 0x300000,  20000 000 000 000
 
 // init token
 //! sender: owner
@@ -12,7 +13,6 @@ script {
     use 0x1::STC::STC;
     use 0x100000::SHARE;
     use 0x100000::WEN;
-    use 0x100000::TokenSwapRouter;
     use 0x100000::LendingPool;
     use 0x100000::STCLendingPoolV1::STC_POOL;
     use 0x100000::WithdrawerV1 as Withdrawer;
@@ -26,14 +26,6 @@ script {
         WEN::mint_to(&sender, addr, 5000 * scale);
         // mint 500000 share
         SHARE::mint(&sender, addr, 500000 * scale);
-
-        // stc-wen  5000 : 500
-        TokenSwapRouter::register_swap_pair<STC, WEN::WEN>(&sender);
-        TokenSwapRouter::add_liquidity<STC, WEN::WEN>(&sender, 5000 * scale, 500 * scale, 0, 0);
-
-        // stc-share  5000 : 500000
-        TokenSwapRouter::register_swap_pair<STC, SHARE::SHARE>(&sender);
-        TokenSwapRouter::add_liquidity<STC, SHARE::SHARE>(&sender, 5000 * scale, 500000 * scale, 0, 0);
 
         // init stc Lendingpool
         LendingPool::initialize<STC_POOL, STC, WEN::WEN>(
@@ -50,6 +42,38 @@ script {
 
         // init withdrawer
         Withdrawer::initialize(sender, 0);
+    }
+}
+
+//! new-transaction
+//! sender: swaper
+script {
+    use 0x1::STC::STC;
+    use 0x100000::SHARE;
+    use 0x100000::WEN;
+    use 0x300000::TokenSwapRouter;
+    fun main(sender: signer) {
+        TokenSwapRouter::register_swap_pair<STC, WEN::WEN>(&sender);
+        TokenSwapRouter::register_swap_pair<STC, SHARE::SHARE>(&sender);
+    }
+}
+
+// add lp
+//! new-transaction
+//! sender: owner
+script {
+    use 0x1::STC::STC;
+    use 0x100000::SHARE;
+    use 0x100000::WEN;
+    use 0x300000::TokenSwapRouter;
+    fun main(sender: signer) {
+        let scale = 1000 * 1000 * 1000;
+
+        // stc-wen  5000 : 500
+        TokenSwapRouter::add_liquidity<STC, WEN::WEN>(&sender, 5000 * scale, 500 * scale, 0, 0);
+
+        // stc-share  5000 : 500000
+        TokenSwapRouter::add_liquidity<STC, SHARE::SHARE>(&sender, 5000 * scale, 500000 * scale, 0, 0);
     }
 }
 

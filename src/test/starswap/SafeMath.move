@@ -1,4 +1,4 @@
-address 0x100000 {
+address 0x300000 {
 module StarswapSafeMath {
     use 0x1::Math;
     use 0x1::Errors;
