@@ -6,7 +6,6 @@ module KikoSwapFarm {
     use 0x1::Signer;
 
     use 0x100000::YieldFarmingV1 as YieldFarming;
-    // KikoSwap address on barnard: 0x93777129c9b671d022c27ced0a4017f4
     use 0x400000::SwapPair::LPToken as LiquidityToken;
     use 0x400000::SwapLibrary;
 

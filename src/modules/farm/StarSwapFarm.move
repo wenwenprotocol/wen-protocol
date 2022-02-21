@@ -6,7 +6,6 @@ module StarSwapFarm {
     use 0x1::Signer;
 
     use 0x100000::YieldFarmingV1 as YieldFarming;
-    // TokenSwap address on barnard: 0x4783d08fb16990bd35d83f3e23bf93b8
     use 0x300000::TokenSwap::{Self, LiquidityToken};
 
     // store cap

@@ -30,8 +30,12 @@ module STCLendingPoolV2 {
             ORACLE_NAME,
         );
     }
+    // for withdrawer
+    public fun do_deposit(account: &signer, amount: u128) {
+        LendingPool::deposit<STC_POOL_V2, WEN>(account, amount);
+    }
     public(script) fun deposit(account: signer, amount: u128) {
-        LendingPool::deposit<STC_POOL_V2, WEN>(&account, amount);
+        do_deposit(&account, amount);
     }
     public(script) fun init_min_borrow(account: signer) {
         LendingPool::init_min_borrow<STC_POOL_V2>(&account, BORROW_LIMIT);
@@ -45,7 +49,9 @@ module STCLendingPoolV2 {
     public(script) fun set_fee_to(account: signer, new_fee_to: address) {
         LendingPool::set_fee_to<STC_POOL_V2>(&account, new_fee_to);
     }
-    public(script) fun withdraw() { LendingPool::withdraw<STC_POOL_V2, WEN>(); }
+    // for withdrawer
+    public fun do_withdraw() { LendingPool::withdraw<STC_POOL_V2, WEN>(); }
+    public(script) fun withdraw() { do_withdraw(); }
     public(script) fun accrue() { LendingPool::accrue<STC_POOL_V2, WEN>(); }
 
     // oracle

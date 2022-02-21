@@ -3,4 +3,4 @@ build/
 storage/
 .idea
 .vscode/
-replace.sh
+Makefile
