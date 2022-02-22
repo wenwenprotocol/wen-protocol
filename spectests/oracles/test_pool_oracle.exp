@@ -1,0 +1,51 @@
+processed 10 tasks
+
+task 5 'run'. lines 12-24:
+{
+  "gas_used": 17239,
+  "status": {
+    "Keep": {
+      "MoveAbort": [
+        {
+          "Module": {
+            "address": "0x26613b3723853d60c3abada52158c3da",
+            "name": "PoolOracle"
+          }
+        },
+        202
+      ]
+    }
+  }
+}
+
+task 6 'run'. lines 25-33:
+{
+  "gas_used": 63583,
+  "status": {
+    "Keep": "Executed"
+  }
+}
+
+task 7 'run'. lines 36-49:
+{
+  "gas_used": 22813,
+  "status": {
+    "Keep": "Executed"
+  }
+}
+
+task 8 'run'. lines 50-66:
+{
+  "gas_used": 129947,
+  "status": {
+    "Keep": "Executed"
+  }
+}
+
+task 9 'run'. lines 67-82:
+{
+  "gas_used": 100998,
+  "status": {
+    "Keep": "Executed"
+  }
+}

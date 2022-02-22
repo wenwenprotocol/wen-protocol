@@ -1,0 +1,12 @@
+[package]
+name = "WenProtocol"
+version = "0.1.0"
+
+[addresses]
+StarcoinFramework = "0x1"
+WenProtocol = "0x26613b3723853d60c3abada52158c3da"
+
+[dependencies]
+StarcoinFramework = {git = "https://github.com/starcoinorg/starcoin-framework.git", rev="cf1deda"}
+StarSwap = { local = "./packages/starswap" }
+KikoSwap = { local = "./packages/kikoswap" }
