@@ -1,0 +1,107 @@
+processed 24 tasks
+
+task 7 'run'. lines 16-27:
+{
+  "gas_used": 109496,
+  "status": {
+    "Keep": "Executed"
+  }
+}
+
+task 8 'run'. lines 28-40:
+{
+  "gas_used": 845026,
+  "status": {
+    "Keep": "Executed"
+  }
+}
+
+task 9 'run'. lines 43-53:
+{
+  "gas_used": 39884,
+  "status": {
+    "Keep": "Executed"
+  }
+}
+
+task 10 'run'. lines 54-61:
+{
+  "gas_used": 68541,
+  "status": {
+    "Keep": "Executed"
+  }
+}
+
+task 11 'run'. lines 64-76:
+{
+  "gas_used": 541508,
+  "status": {
+    "Keep": "Executed"
+  }
+}
+
+task 13 'run'. lines 82-104:
+{
+  "gas_used": 1068480,
+  "status": {
+    "Keep": "Executed"
+  }
+}
+
+task 15 'run'. lines 110-145:
+{
+  "gas_used": 539024,
+  "status": {
+    "Keep": "Executed"
+  }
+}
+
+task 17 'run'. lines 150-158:
+{
+  "gas_used": 229442,
+  "status": {
+    "Keep": "Executed"
+  }
+}
+
+task 19 'run'. lines 163-175:
+{
+  "gas_used": 93861,
+  "status": {
+    "Keep": {
+      "MoveAbort": [
+        {
+          "Module": {
+            "address": "0x26613b3723853d60c3abada52158c3da",
+            "name": "WithdrawerWithKiko"
+          }
+        },
+        101
+      ]
+    }
+  }
+}
+
+task 20 'run'. lines 176-190:
+{
+  "gas_used": 1108188,
+  "status": {
+    "Keep": "Executed"
+  }
+}
+
+task 22 'run'. lines 195-208:
+{
+  "gas_used": 99433,
+  "status": {
+    "Keep": "Executed"
+  }
+}
+
+task 23 'run'. lines 211-218:
+{
+  "gas_used": 113918,
+  "status": {
+    "Keep": "Executed"
+  }
+}

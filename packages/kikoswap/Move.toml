@@ -1,0 +1,10 @@
+[package]
+name = "KikoSwap"
+version = "0.0.1"
+
+[addresses]
+KikoSwap = "0xf558b380f6c9dc2066a31d896874eaa1"
+StarcoinFramework = "0x1"
+
+[dependencies]
+StarcoinFramework = {git = "https://github.com/starcoinorg/starcoin-framework.git", rev="cf1deda"}

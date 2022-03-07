@@ -1,0 +1,169 @@
+processed 22 tasks
+
+task 6 'run'. lines 15-22:
+{
+  "gas_used": 200245,
+  "status": {
+    "Keep": "Executed"
+  }
+}
+
+task 7 'run'. lines 25-35:
+{
+  "gas_used": 37143,
+  "status": {
+    "Keep": "Executed"
+  }
+}
+
+task 8 'run'. lines 36-46:
+{
+  "gas_used": 88403,
+  "status": {
+    "Keep": "Executed"
+  }
+}
+
+task 9 'run'. lines 47-57:
+{
+  "gas_used": 109496,
+  "status": {
+    "Keep": "Executed"
+  }
+}
+
+task 10 'run'. lines 58-81:
+{
+  "gas_used": 23718,
+  "status": {
+    "Keep": {
+      "MoveAbort": [
+        {
+          "Module": {
+            "address": "0x26613b3723853d60c3abada52158c3da",
+            "name": "LendingPoolV2"
+          }
+        },
+        101
+      ]
+    }
+  }
+}
+
+task 11 'run'. lines 82-127:
+{
+  "gas_used": 636245,
+  "status": {
+    "Keep": "Executed"
+  }
+}
+
+task 12 'run'. lines 128-154:
+{
+  "gas_used": 326223,
+  "status": {
+    "Keep": "Executed"
+  }
+}
+
+task 13 'run'. lines 155-170:
+{
+  "gas_used": 61823,
+  "status": {
+    "Keep": {
+      "MoveAbort": [
+        {
+          "Module": {
+            "address": "0x26613b3723853d60c3abada52158c3da",
+            "name": "LendingPoolV2"
+          }
+        },
+        111
+      ]
+    }
+  }
+}
+
+task 14 'run'. lines 171-190:
+{
+  "gas_used": 167410,
+  "status": {
+    "Keep": {
+      "MoveAbort": [
+        {
+          "Module": {
+            "address": "0x26613b3723853d60c3abada52158c3da",
+            "name": "LendingPoolV2"
+          }
+        },
+        113
+      ]
+    }
+  }
+}
+
+task 15 'run'. lines 191-214:
+{
+  "gas_used": 307385,
+  "status": {
+    "Keep": "Executed"
+  }
+}
+
+task 16 'run'. lines 215-241:
+{
+  "gas_used": 180488,
+  "status": {
+    "Keep": "Executed"
+  }
+}
+
+task 17 'run'. lines 242-268:
+{
+  "gas_used": 187688,
+  "status": {
+    "Keep": "Executed"
+  }
+}
+
+task 18 'run'. lines 269-289:
+{
+  "gas_used": 334270,
+  "status": {
+    "Keep": "Executed"
+  }
+}
+
+task 19 'run'. lines 290-304:
+{
+  "gas_used": 24671,
+  "status": {
+    "Keep": {
+      "MoveAbort": [
+        {
+          "Module": {
+            "address": "0x26613b3723853d60c3abada52158c3da",
+            "name": "LendingPoolV2"
+          }
+        },
+        101
+      ]
+    }
+  }
+}
+
+task 20 'run'. lines 305-322:
+{
+  "gas_used": 58666,
+  "status": {
+    "Keep": "Executed"
+  }
+}
+
+task 21 'run'. lines 323-337:
+{
+  "gas_used": 58776,
+  "status": {
+    "Keep": "Executed"
+  }
+}
