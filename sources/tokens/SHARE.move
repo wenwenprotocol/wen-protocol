@@ -18,16 +18,12 @@ module SHARE {
     }
 
     public fun mint(account: &signer, to: address, amount: u128) {
-        let max_supply = get_max_supply();
-        let total_supply = Token::market_cap<SHARE>();
-        assert!(max_supply >= (total_supply + amount), ERR_TOO_BIG_AMOUNT);
-        let token = Token::mint<SHARE>(account, amount);
-        Account::deposit<SHARE>(to, token);
+        assert!(get_max_supply() >= (Token::market_cap<SHARE>() + amount), ERR_TOO_BIG_AMOUNT);
+        Account::deposit<SHARE>(to, Token::mint<SHARE>(account, amount));
     }
 
     public fun get_max_supply(): u128 {
-        let scaling_factor = Token::scaling_factor<SHARE>();
-        MAX_SUPPLY * scaling_factor
+        Token::scaling_factor<SHARE>() * MAX_SUPPLY
     }
 }
 
@@ -54,12 +50,9 @@ module SHARETeamTreasury {
     }
 
     public(script) fun withdraw(account: signer, to: address) {
-        let token = Treasury::withdraw_by_linear<SHARE>(&account);
-        Account::deposit<SHARE>(to, token);
+        Account::deposit<SHARE>(to, Treasury::withdraw_by_linear<SHARE>(&account));
     }
 
-    public fun balance(): u128 {
-        Treasury::balance<SHARE>()
-    }
+    public fun balance(): u128 { Treasury::balance<SHARE>() }
 }
 }

@@ -92,23 +92,20 @@ module SSHARE {
     }
 
     public(script) fun deposit(asigner: signer, amount: u128) acquires Treasury {
-        let account = &asigner;
-        let owner = assert_treasury();
         assert!(amount > 0, ERR_ZERO_AMOUNT);
 
-        let treasury = borrow_global_mut<Treasury>(owner);
-        Token::deposit(&mut treasury.token, Account::withdraw<SHARE>(account, amount));
+        let treasury = borrow_global_mut<Treasury>(assert_treasury());
+        Token::deposit(&mut treasury.token, Account::withdraw<SHARE>(&asigner, amount));
         Event::emit_event(
             &mut treasury.deposit_events,
             DepositEvent {
-                account: Signer::address_of(account),
+                account: Signer::address_of(&asigner),
                 amount: amount,
             },
         );
     }
 
     public(script) fun mint(asigner: signer, amount: u128) acquires Treasury, Balance, SharedMintCapability {
-        let account = &asigner;
         let owner = assert_treasury();
         assert!(amount > 0, ERR_ZERO_AMOUNT);
 
@@ -116,7 +113,7 @@ module SSHARE {
         let total_supply = total_supply();
         let treasury = borrow_global<Treasury>(owner);
         if (total_supply == 0) {
-            do_mint(account, owner, amount, amount);
+            do_mint(&asigner, owner, amount, amount);
         } else {
             // (amount * total_supply) / total_share_tokens;
             let samount = SafeMath::safe_mul_div(
@@ -124,7 +121,7 @@ module SSHARE {
                 total_supply,
                 Token::value(&treasury.token),
             );
-            do_mint(account, owner, amount, samount);
+            do_mint(&asigner, owner, amount, samount);
         };
     }
 
@@ -161,8 +158,7 @@ module SSHARE {
     }
 
     public(script) fun claim(asigner: signer) acquires Treasury, Balance {
-        let account = &asigner;
-        let addr = Signer::address_of(account);
+        let addr = Signer::address_of(&asigner);
         assert!(exists<Balance>(addr), ERR_NOT_EXIST);
         let balance = borrow_global_mut<Balance>(addr);
         assert!(balance.locked_until <= Timestamp::now_seconds(), ERR_LOCKED);
@@ -171,7 +167,7 @@ module SSHARE {
 
         // accept token
         if (!Account::is_accepts_token<SSHARE>(addr)) {
-            Account::do_accept_token<SSHARE>(account);
+            Account::do_accept_token<SSHARE>(&asigner);
         };
 
         // Affect Treasury
@@ -188,13 +184,12 @@ module SSHARE {
         assert!(samount > 0, ERR_ZERO_AMOUNT);
 
         // get share amount
-        let total_supply = total_supply();
         let treasury = borrow_global_mut<Treasury>(owner);
         // (samount * total_amount) / total_supply;
         let amount = SafeMath::safe_mul_div(
             samount,
             Token::value(&treasury.token),
-            total_supply,
+            total_supply(),
         );
 
         // burn
@@ -206,7 +201,7 @@ module SSHARE {
         Account::deposit(addr, Token::withdraw(&mut treasury.token, amount));
         Event::emit_event(
             &mut treasury.burn_events,
-            BurnEvent { account: Signer::address_of(account), amount: amount },
+            BurnEvent { account: addr, amount: amount },
         );
     }
 }
