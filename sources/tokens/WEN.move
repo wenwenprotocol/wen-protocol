@@ -53,8 +53,7 @@ module WEN {
         minting.time = now;
         minting.amount = total_minted_amount;
 
-        let token = Token::mint<WEN>(account, amount);
-        Account::deposit<WEN>(to, token);
+        Account::deposit<WEN>(to, Token::mint<WEN>(account, amount));
     }
 }
 }

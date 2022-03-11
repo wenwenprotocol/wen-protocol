@@ -63,11 +63,7 @@ module SafeMath {
 
     public fun safe_more_than_or_equal(x1: u128, y1: u128, x2: u128, y2: u128): bool {
         let r_order = safe_compare(x1, y1, x2, y2);
-        if(EQUAL == r_order || GREATER_THAN == r_order){
-            true
-        } else {
-            false
-        }
+        EQUAL == r_order || GREATER_THAN == r_order
     }
 
     /// support 18-bit precision token

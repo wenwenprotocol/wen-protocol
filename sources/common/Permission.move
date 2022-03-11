@@ -78,12 +78,7 @@ module Permission {
     }
 
     public fun is_owner<PermType: store>(addr: address): bool {
-        let owner = owner_address<PermType>();
-        if (owner == addr) {
-            true
-        } else {
-            false
-        }
+        owner_address<PermType>() == addr
     }
 }
 }

@@ -10,7 +10,7 @@ task 7 'run'. lines 16-27:
 
 task 8 'run'. lines 28-40:
 {
-  "gas_used": 845026,
+  "gas_used": 844954,
   "status": {
     "Keep": "Executed"
   }
@@ -42,7 +42,7 @@ task 11 'run'. lines 64-74:
 
 task 13 'run'. lines 80-102:
 {
-  "gas_used": 1917630,
+  "gas_used": 1917294,
   "status": {
     "Keep": "Executed"
   }
@@ -50,7 +50,7 @@ task 13 'run'. lines 80-102:
 
 task 15 'run'. lines 108-143:
 {
-  "gas_used": 539024,
+  "gas_used": 538628,
   "status": {
     "Keep": "Executed"
   }
@@ -84,7 +84,7 @@ task 19 'run'. lines 161-173:
 
 task 20 'run'. lines 174-188:
 {
-  "gas_used": 3576602,
+  "gas_used": 3576492,
   "status": {
     "Keep": "Executed"
   }
