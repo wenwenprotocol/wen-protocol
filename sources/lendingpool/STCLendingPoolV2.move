@@ -9,13 +9,13 @@ module STCLendingPoolV2 {
     struct STC_POOL_V2 has store {}
 
     const ORACLE_NAME: vector<u8> = b"STC_POOL";
-    const COLLATERIZATION_RATE: u128 = 67500;       // 67.5%
-    const LIQUIDATION_THRESHOLD: u128 = 80000;      // 80%
-    const LIQUIDATION_MULTIPLIER: u128 = 107500;    // 107.5%
+    const COLLATERIZATION_RATE: u128 = 50000;       // 50%
+    const LIQUIDATION_THRESHOLD: u128 = 70000;      // 70%
+    const LIQUIDATION_MULTIPLIER: u128 = 112500;    // 112.5%
     const BORROW_OPENING_FEE: u128 = 500;           // 0.5%
-    const INTEREST: u128 = 1000;                    // 1%
-    const TOKEN_AMOUNT: u128 = 10 * 10000 * 1000 * 1000 * 1000;
-    const BORROW_LIMIT: u128 = 0;
+    const INTEREST: u128 = 2000;                    // 2%
+    const TOKEN_AMOUNT: u128 = 1000 * 1000 * 1000 * 1000 * 1000; // 1m
+    const BORROW_LIMIT: u128 = 1 * 1000 * 1000 * 1000;  // 1 WEN
 
     public(script) fun initialize(account: signer) {
         WEN::mint_to(&account, Signer::address_of(&account), TOKEN_AMOUNT);
