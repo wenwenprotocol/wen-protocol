@@ -1,8 +1,8 @@
-//# init -n test --public-keys WenProtocol=0x07d815b1ef166cbba8dc80e6e2f0e50e3461551ca118a6587632e615123139a6 KikoSwap=0xf3a4785b667500bbb2181b2709cb384ccfc82b6cdff9cb2446dec57a02e85636 PublicOracle=0x3517cf661eb9ec48ad86639db66ea463b871b7d10c52bb37461570aef68f8c36 --addresses PublicOracle=0x07fa08a855753f0ff7292fdcbe871216
+//# init -n test --public-keys WenProtocol=0x07d815b1ef166cbba8dc80e6e2f0e50e3461551ca118a6587632e615123139a6 --public-keys StarSwap=0x9e24b6eb5ee291fe4977623a246931bf0675f402ad824a617f4ab8b8c48c934a --public-keys PublicOracle=0x3517cf661eb9ec48ad86639db66ea463b871b7d10c52bb37461570aef68f8c36 --addresses PublicOracle=0x07fa08a855753f0ff7292fdcbe871216
 
 //# faucet --addr WenProtocol --amount 20000000000000
 
-//# faucet --addr KikoSwap
+//# faucet --addr StarSwap
 
 //# faucet --addr PublicOracle
 
@@ -53,25 +53,23 @@ script {
 // withdrawer init
 //# run --signers WenProtocol
 script {
-    use WenProtocol::WithdrawerWithKiko;
+    use WenProtocol::WithdrawerWithStar;
 
     fun main(sender: signer) {
-        WithdrawerWithKiko::initialize(sender);
+        WithdrawerWithStar::initialize(sender);
     }
 }
 
 
-//# run --signers KikoSwap
+//# run --signers StarSwap
 script {
     use StarcoinFramework::STC::STC;
     use WenProtocol::SHARE;
     use WenProtocol::WEN;
-    use KikoSwap::SwapPair;
-    use KikoSwap::SwapConfig;
+    use StarSwap::TokenSwap;
     fun main(sender: signer) {
-        SwapConfig::initialize(&sender, 30, 5, 0, 0, 0, 0, 0);
-        SwapPair::create_pair<STC, WEN::WEN>(&sender);
-        SwapPair::create_pair<STC, SHARE::SHARE>(&sender);
+        TokenSwap::register_swap_pair<STC, WEN::WEN>(&sender);
+        TokenSwap::register_swap_pair<STC, SHARE::SHARE>(&sender);
     }
 }
 
@@ -85,7 +83,7 @@ script {
     use StarcoinFramework::STC::STC;
     use WenProtocol::SHARE;
     use WenProtocol::WEN;
-    use KikoSwap::SwapRouter;
+    use StarSwap::TokenSwapRouter;
     fun main(sender: signer) {
         let addr = Signer::address_of(&sender);
         let amount = 5000 * 1000 * 1000 * 1000; // 5000 stc
@@ -96,10 +94,10 @@ script {
         SHARE::mint(&sender, addr, amount * 100);
 
         // stc-wen  5000 : 500
-        SwapRouter::add_liquidity<STC, WEN::WEN>(&sender, amount, amount / 10, 0, 0);
+        TokenSwapRouter::add_liquidity<STC, WEN::WEN>(&sender, amount, amount / 10, 0, 0);
 
         // stc-share  5000 : 500000
-        SwapRouter::add_liquidity<STC, SHARE::SHARE>(&sender, amount, amount * 100, 0, 0);
+        TokenSwapRouter::add_liquidity<STC, SHARE::SHARE>(&sender, amount, amount * 100, 0, 0);
     }
 }
 
@@ -162,7 +160,7 @@ script {
 // alice can not withdraw fee
 //# run --signers alice
 script {
-    use WenProtocol::WithdrawerWithKiko as Withdrawer;
+    use WenProtocol::WithdrawerWithStar as Withdrawer;
 
     fun main(sender: signer) {
         assert!(Withdrawer::balance() == 0, 200);
@@ -178,7 +176,7 @@ script {
     use StarcoinFramework::Account;
     use WenProtocol::SSHARE;
     use WenProtocol::WEN::WEN;
-    use WenProtocol::WithdrawerWithKiko as Withdrawer;
+    use WenProtocol::WithdrawerWithStar as Withdrawer;
 
     fun main(sender: signer) {
         Account::do_accept_token<WEN>(&sender);
@@ -195,7 +193,7 @@ script {
 //# run --signers WenProtocol
 script {
     use StarcoinFramework::Signer;
-    use WenProtocol::WithdrawerWithKiko as Withdrawer;
+    use WenProtocol::WithdrawerWithStar as Withdrawer;
 
     fun main(sender: signer) {
         let addr = Signer::address_of(&sender);
@@ -210,7 +208,7 @@ script {
 
 //# run --signers WenProtocol
 script {
-    use WenProtocol::WithdrawerWithKiko as Withdrawer;
+    use WenProtocol::WithdrawerWithStar as Withdrawer;
 
     fun main(sender: signer) {
         Withdrawer::destroy(sender);
