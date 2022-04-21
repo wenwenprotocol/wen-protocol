@@ -12,7 +12,7 @@ mpm sandbox publish --ignore-breaking-changes
 ## Test
 
 ```
-mpm spectest
+mpm integration-test
 ```
 
 ---
