@@ -1,4 +1,4 @@
-//# init -n test --public-keys WenProtocol=0x07d815b1ef166cbba8dc80e6e2f0e50e3461551ca118a6587632e615123139a6 --public-keys StarSwap=0x9e24b6eb5ee291fe4977623a246931bf0675f402ad824a617f4ab8b8c48c934a
+//# init -n test --public-keys WenProtocol=0x07d815b1ef166cbba8dc80e6e2f0e50e3461551ca118a6587632e615123139a6 --public-keys StarSwap=0x5510ddb2f172834db92842b0b640db08c2bc3cd986def00229045d78cc528ac5
 
 //# faucet --addr WenProtocol
 

@@ -1,4 +1,4 @@
-//# init -n test --public-keys WenProtocol=0x07d815b1ef166cbba8dc80e6e2f0e50e3461551ca118a6587632e615123139a6 --public-keys KikoSwap=0xf3a4785b667500bbb2181b2709cb384ccfc82b6cdff9cb2446dec57a02e85636
+//# init -n test --public-keys WenProtocol=0x07d815b1ef166cbba8dc80e6e2f0e50e3461551ca118a6587632e615123139a6 --public-keys KikoSwap=0xb714df92b3dd4dd9293cb3992b09f53193a4f81a1957bdb0c0df090838349595
 
 //# faucet --addr WenProtocol
 

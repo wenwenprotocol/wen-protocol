@@ -1,4 +1,4 @@
-//# init -n test --public-keys WenProtocol=0x07d815b1ef166cbba8dc80e6e2f0e50e3461551ca118a6587632e615123139a6 --public-keys PublicOracle=0x3517cf661eb9ec48ad86639db66ea463b871b7d10c52bb37461570aef68f8c36 --addresses PublicOracle=0x07fa08a855753f0ff7292fdcbe871216
+//# init -n test --public-keys WenProtocol=0x07d815b1ef166cbba8dc80e6e2f0e50e3461551ca118a6587632e615123139a6 --public-keys PublicOracle=0x671f257c6c31231bb272fb67e3090b1f6218010a2e7e31e677ce56924ae12074 --addresses PublicOracle=0x82e35b34096f32c42061717c06e44a59
 
 //# faucet --addr WenProtocol
 

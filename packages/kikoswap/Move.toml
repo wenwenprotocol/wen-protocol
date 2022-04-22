@@ -3,7 +3,7 @@ name = "KikoSwap"
 version = "0.0.1"
 
 [addresses]
-KikoSwap = "0xf558b380f6c9dc2066a31d896874eaa1"
+KikoSwap = "0xa371dcd3556f40221b480bd1792c02ad"
 StarcoinFramework = "0x1"
 
 [dependencies]

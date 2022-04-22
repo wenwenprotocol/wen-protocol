@@ -1,4 +1,4 @@
-//# init -n test --public-keys WenProtocol=0x07d815b1ef166cbba8dc80e6e2f0e50e3461551ca118a6587632e615123139a6 --public-keys KikoSwap=0xf3a4785b667500bbb2181b2709cb384ccfc82b6cdff9cb2446dec57a02e85636 --public-keys PublicOracle=0x3517cf661eb9ec48ad86639db66ea463b871b7d10c52bb37461570aef68f8c36 --addresses PublicOracle=0x07fa08a855753f0ff7292fdcbe871216
+//# init -n test --public-keys WenProtocol=0x07d815b1ef166cbba8dc80e6e2f0e50e3461551ca118a6587632e615123139a6 --public-keys KikoSwap=0xb714df92b3dd4dd9293cb3992b09f53193a4f81a1957bdb0c0df090838349595 --public-keys PublicOracle=0x671f257c6c31231bb272fb67e3090b1f6218010a2e7e31e677ce56924ae12074 --addresses PublicOracle=0x82e35b34096f32c42061717c06e44a59
 
 //# faucet --addr WenProtocol --amount 20000000000000
 
@@ -133,14 +133,14 @@ script {
             actions,
             8000 * scale,           // collateral amount
             0, addr,                // remove collateral
-            500 * scale, addr,   // borrow amount
+            50 * scale, addr,   // borrow amount
             0, addr,                // repay amount
         );
 
         let after = Account::balance<WEN>(addr);
 
         assert!(before == 0, 100);
-        assert!(after == 500 * scale, 101);
+        assert!(after == 50 * scale, 101);
     }
 }
 

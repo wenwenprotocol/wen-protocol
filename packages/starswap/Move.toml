@@ -3,7 +3,7 @@ name = "StarSwap"
 version = "0.0.1"
 
 [addresses]
-StarSwap = "0x5ad03008d3c4d26c01a9c71225a3407a"
+StarSwap = "0x8c109349c6bd91411d6bc962e080c4a3"
 StarcoinFramework = "0x1"
 
 [dependencies]
